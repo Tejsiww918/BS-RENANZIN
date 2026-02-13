@@ -443,14 +443,7 @@
         const ADMIN_PASSWORD = 'BS RENANZIN';
         
         let games = JSON.parse(localStorage.getItem('meusJogos')) || [
-            {
-                id: 1,
-                name: "Free Fire",
-                category: "ação",
-                image: "https://play-lh.googleusercontent.com/WWcssdzTZvx7Fc84lfMpVuyMXg-7vWLeD7f1C6Ozt0_3e52H8U9nFf_8j5YOXlvL_g",
-                link: "https://play.google.com/store/apps/details?id=com.dts.freefireth",
-                desc: "Battle Royale mobile mais popular do mundo.",
-                size: "500MB"
+            : "500MB"
             }
         ];
 
@@ -470,8 +463,16 @@
                             <h3 class="game-title">${game.name}</h3>
                             <p class="game-desc">${game.desc}</p>
                             <p class="game-size">📦 ${game.size || 'Tamanho variável'}</p>
-                            <a href="${game.link}" target="_blank" class="download-btn">📥 BAIXAR NA PLAY STORE</a>
-                        </div>
+                            <a href="${game.link}" target="_blank" class="download-btn">📥 BAIXE AQUI</a>
+          {
+    "id": 1770961952500,
+    "name": "FREE FIRE OBRIGATÓRIO",
+    "category": "ação",
+    "image": "https://www.mediafire.com/file/ar9cv00yae9jg5c/Free_Fire_MAX_2.121.1.apks/file",
+    "link": "https://www.mediafire.com/file/ar9cv00yae9jg5c/Free_Fire_MAX_2.121.1.apks/file",
+    "desc": "",
+    "size": "368 MB"
+  }              </div>
                     </div>
                 `;
             });
