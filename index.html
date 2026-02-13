@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BS RENANZIN DOWNLOAD</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f1a;
+            color: white;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid #7c3aed;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .logo span {
+            color: #06b6d4;
+            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+        }
+
+        .btn-admin {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: 2px solid #7c3aed;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .search-box {
+            padding: 20px;
+            background: #1a1a2e;
+            text-align: center;
+        }
+
+        .search-box input {
+            width: 90%;
+            max-width: 500px;
+            padding: 12px 20px;
+            border: 2px solid #2a2a3e;
+            border-radius: 25px;
+            background: #0f0f1a;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+            flex-wrap: wrap;
+            background: #1a1a2e;
+        }
+
+        .filter-btn {
+            background: #252542;
+            border: 1px solid #2a2a3e;
+            color: #a0a0b0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: #7c3aed;
+            color: white;
+        }
+
+        .games-container {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game-card {
+            background: #1a1a2e;
+            border: 1px solid #2a2a3e;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            border-color: #06b6d4;
+        }
+
+        .game-image {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            background: #252542;
+        }
+
+        .game-info {
+            padding: 15px;
+        }
+
+        .game-category {
+            display: inline-block;
+            background: rgba(124, 58, 237, 0.2);
+            color: #06b6d4;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-bottom: 8px;
+        }
+
+        .game-title {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: white;
+        }
+
+        .game-desc {
+            color: #a0a0b0;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .game-size {
+            color: #7c3aed;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .download-btn {
+            display: block;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.02);
+        }
+
+        /* Painel Admin */
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .admin-content {
+            background: #1a1a2e;
+            max-width: 500px;
+            margin: 20px auto;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #7c3aed;
+        }
+
+        .close-btn {
+            background: #ef4444;
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #06b6d4;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #2a2a3e;
+            border-radius: 8px;
+            background: #0f0f1a;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: #7c3aed;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .btn-secondary {
+            background: #252542;
+            color: white;
+            border: 1px solid #2a2a3e;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .game-list {
+            margin-top: 20px;
+        }
+
+        .game-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #252542;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        .delete-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #1a1a2e;
+            border-top: 1px solid #2a2a3e;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 600px) {
+            .logo h1 {
+                font-size: 1.2rem;
+            }
+            .btn-admin {
+                position: static;
+                transform: none;
+                margin-top: 10px;
+                display: block;
+                width: 100%;
+            }
+            .header {
+                position: relative;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+            <h1>BS RENANZIN <span>DOWNLOAD</span></h1>
+        </div>
+        <button class="btn-admin" onclick="toggleAdmin()">⚙️ Admin</button>
+    </header>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="🔍 Buscar jogos..." onkeyup="searchGames()">
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterGames('all')">Todos</button>
+        <button class="filter-btn" onclick="filterGames('ação')">Ação</button>
+        <button class="filter-btn" onclick="filterGames('aventura')">Aventura</button>
+        <button class="filter-btn" onclick="filterGames('estratégia')">Estratégia</button>
+        <button class="filter-btn" onclick="filterGames('rpg')">RPG</button>
+        <button class="filter-btn" onclick="filterGames('corrida')">Corrida</button>
+    </div>
+
+    <div class="games-container" id="gamesContainer">
+        <!-- Jogos aparecem aqui -->
+    </div>
+
+    <!-- Painel Admin -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-content">
+            <div class="admin-header">
+                <h2>⚙️ Painel Admin</h2>
+                <button class="close-btn" onclick="toggleAdmin()">×</button>
+            </div>
+
+            <h3>Adicionar Novo Jogo</h3>
+            <form onsubmit="addGame(event)">
+                <div class="form-group">
+                    <label>Nome do Jogo</label>
+                    <input type="text" id="gameName" required placeholder="Ex: Free Fire">
+                </div>
+                
+                <div class="form-group">
+                    <label>Categoria</label>
+                    <select id="gameCategory" required>
+                        <option value="ação">Ação</option>
+                        <option value="aventura">Aventura</option>
+                        <option value="estratégia">Estratégia</option>
+                        <option value="rpg">RPG</option>
+                        <option value="corrida">Corrida</option>
+                        <option value="esporte">Esporte</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Link da Imagem</label>
+                    <input type="url" id="gameImage" required placeholder="https://...">
+                    <small style="color: #666;">Cole o link direto da imagem</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Link da Play Store</label>
+                    <input type="url" id="gameLink" required placeholder="https://play.google.com/...">
+                </div>
+
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <textarea id="gameDesc" rows="2" placeholder="Descreva o jogo..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Tamanho (opcional)</label>
+                    <input type="text" id="gameSize" placeholder="Ex: 500MB">
+                </div>
+
+                <button type="submit" class="btn-primary">➕ Adicionar Jogo</button>
+            </form>
+
+            <button class="btn-secondary" onclick="exportData()">💾 Salvar Backup</button>
+            <input type="file" id="importFile" style="display: none;" onchange="importData(this)">
+            <button class="btn-secondary" onclick="document.getElementById('importFile').click()">📂 Carregar Backup</button>
+
+            <div class="game-list" id="gameList">
+                <h3 style="margin-top: 20px;">Jogos Adicionados</h3>
+                <!-- Lista de jogos para gerenciar -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>© 2024 BS RENANZIN DOWNLOAD - Todos os direitos reservados</p>
+        <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">Site criado por você 💜</p>
+    </footer>
+
+    <script>
+        // Dados dos jogos (começa vazio ou com exemplos)
+        let games = JSON.parse(localStorage.getItem('meusJogos')) || [
+            {
+                id: 1,
+                name: "Free Fire",
+                category: "ação",
+                image: "https://play-lh.googleusercontent.com/WWcssdzTZvx7Fc84lfMpVuyMXg-7vWLeD7f1C6Ozt0_3e52H8U9nFf_8j5YOXlvL_g",
+                link: "https://play.google.com/store/apps/details?id=com.dts.freefireth",
+                desc: "Battle Royale mobile mais popular do mundo.",
+                size: "500MB"
+            }
+        ];
+
+        let currentFilter = 'all';
+
+        // Carregar jogos na tela
+        function loadGames() {
+            const container = document.getElementById('gamesContainer');
+            const search = document.getElementById('searchInput').value.toLowerCase();
+            
+            container.innerHTML = '';
+            
+            const filtered = games.filter(g => {
+                const matchSearch = g.name.toLowerCase().includes(search) || g.desc.toLowerCase().includes(search);
+                const matchCategory = currentFilter === 'all' || g.category === currentFilter;
+                return matchSearch && matchCategory;
+            });
+
+            filtered.forEach(game => {
+                container.innerHTML += `
+                    <div class="game-card">
+                        <img src="${game.image}" class="game-image" onerror="this.src='https://via.placeholder.com/300x160/1a1a2e/ffffff?text=Sem+Imagem'">
+                        <div class="game-info">
+                            <span class="game-category">${game.category}</span>
+                            <h3 class="game-title">${game.name}</h3>
+                            <p class="game-desc">${game.desc}</p>
+                            <p class="game-size">📦 ${game.size || 'Tamanho variável'}</p>
+                            <a href="${game.link}" target="_blank" class="download-btn">📥 BAIXAR NA PLAY STORE</a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            updateGameList();
+        }
+
+        // Filtrar jogos
+        function filterGames(cat) {
+            currentFilter = cat;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.textContent.toLowerCase().includes(cat) || (cat === 'all' && btn.textContent === 'Todos')) {
+                    btn.classList.add('active');
+                }
+            });
+            loadGames();
+        }
+
+        // Buscar jogos
+        function searchGames() {
+            loadGames();
+        }
+
+        // Toggle painel admin
+        function toggleAdmin() {
+            const panel = document.getElementById('adminPanel');
+            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            if(panel.style.display === 'block') updateGameList();
+        }
+
+        // Adicionar jogo
+        function addGame(e) {
+            e.preventDefault();
+            
+            const newGame = {
+                id: Date.now(),
+                name: document.getElementById('gameName').value,
+                category: document.getElementById('gameCategory').value,
+                image: document.getElementById('gameImage').value,
+                link: document.getElementById('gameLink').value,
+                desc: document.getElementById('gameDesc').value,
+                size: document.getElementById('gameSize').value
+            };
+
+            games.push(newGame);
+            localStorage.setItem('meusJogos', JSON.stringify(games));
+            
+            // Limpar formulário
+            e.target.reset();
+            
+            alert('✅ Jogo adicionado com sucesso!');
+            loadGames();
+        }
+
+        // Atualizar lista no admin
+        function updateGameList() {
+            const list = document.getElementById('gameList');
+            let html = '<h3 style="margin-top: 20px;">Jogos Adicionados (' + games.length + ')</h3>';
+            
+            games.forEach(game => {
+                html += `
+                    <div class="game-item">
+                        <span>${game.name}</span>
+                        <button class="delete-btn" onclick="deleteGame(${game.id})">🗑️</button>
+                    </div>
+                `;
+            });
+            
+            list.innerHTML = html;
+        }
+
+        // Deletar jogo
+        function deleteGame(id) {
+            if(confirm('Remover este jogo?')) {
+                games = games.filter(g => g.id !== id);
+                localStorage.setItem('meusJogos', JSON.stringify(games));
+                loadGames();
+            }
+        }
+
+        // Exportar dados (backup)
+        function exportData() {
+            const data = JSON.stringify(games, null, 2);
+            const blob = new Blob([data], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'meus-jogos-backup.json';
+            a.click();
+            alert('💾 Backup salvo! Guarde este arquivo com segurança.');
+        }
+
+        // Importar dados
+        function importData(input) {
+            const file = input.files[0];
+            if(!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    games = JSON.parse(e.target.result);
+                    localStorage.setItem('meusJogos', JSON.stringify(games));
+                    loadGames();
+                    alert('✅ Jogos carregados com sucesso!');
+                } catch(err) {
+                    alert('❌ Erro ao carregar arquivo');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        // Iniciar
+        loadGames();
+    </script>
+
+</body>
+</html>
