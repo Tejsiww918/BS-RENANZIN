@@ -443,19 +443,16 @@
         const ADMIN_PASSWORD = 'BS RENANZIN';
         
         let games = JSON.parse(localStorage.getItem('meusJogos')) || [
-            [
-  [
-  {
-    "id": 1770959256737,
-    "name": "FREE FIRE OBRIGATÓRIO",
-    "category": "ação",
-    "image": "https://share.google/w1sF5jyfx4VVyBuJa",
-    "link": "https://www.mediafire....",
-    "desc": "",
-    "size": "368 MB"
-  }
-]
-]
+            {
+                id: 1,
+                name: "Free Fire",
+                category: "ação",
+                image: "https://play-lh.googleusercontent.com/WWcssdzTZvx7Fc84lfMpVuyMXg-7vWLeD7f1C6Ozt0_3e52H8U9nFf_8j5YOXlvL_g",
+                link: "https://play.google.com/store/apps/details?id=com.dts.freefireth",
+                desc: "Battle Royale mobile mais popular do mundo.",
+                size: "500MB"
+            }
+        ];
 
         let isAdmin = false;
 
@@ -600,4 +597,3 @@
 
 </body>
 </html>
-
