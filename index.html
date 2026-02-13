@@ -28,14 +28,6 @@
             z-index: 100;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
         .logo h1 {
             font-size: 1.5rem;
             color: white;
@@ -46,59 +38,38 @@
             text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
         }
 
-        .btn-admin {
-            position: absolute;
+        /* Botão Admin escondido - só aparece com senha */
+        .admin-access {
+            position: fixed;
+            bottom: 20px;
             right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: transparent;
-            border: 2px solid #7c3aed;
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9rem;
+            width: 50px;
+            height: 50px;
+            opacity: 0;
+            z-index: 999;
         }
 
-        .search-box {
-            padding: 20px;
-            background: #1a1a2e;
-            text-align: center;
-        }
-
-        .search-box input {
-            width: 90%;
-            max-width: 500px;
-            padding: 12px 20px;
-            border: 2px solid #2a2a3e;
-            border-radius: 25px;
-            background: #0f0f1a;
-            color: white;
-            font-size: 1rem;
-        }
-
-        .filters {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            padding: 10px;
-            flex-wrap: wrap;
-            background: #1a1a2e;
-        }
-
-        .filter-btn {
-            background: #252542;
-            border: 1px solid #2a2a3e;
-            color: #a0a0b0;
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .filter-btn.active, .filter-btn:hover {
+        .btn-admin {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background: #7c3aed;
+            border: none;
             color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
+        }
+
+        .btn-admin.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .games-container {
@@ -179,6 +150,66 @@
             transform: scale(1.02);
         }
 
+        /* Modal de Senha */
+        .password-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .password-modal.show {
+            display: flex;
+        }
+
+        .password-box {
+            background: #1a1a2e;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 300px;
+            width: 90%;
+            border: 2px solid #7c3aed;
+        }
+
+        .password-box h3 {
+            margin-bottom: 20px;
+            color: #06b6d4;
+        }
+
+        .password-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #2a2a3e;
+            border-radius: 8px;
+            background: #0f0f1a;
+            color: white;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .password-box button {
+            background: #7c3aed;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+        .password-box .cancel-btn {
+            background: #ef4444;
+        }
+
         /* Painel Admin */
         .admin-panel {
             display: none;
@@ -187,9 +218,13 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0,0,0,0.9);
-            z-index: 1000;
+            background: rgba(0,0,0,0.95);
+            z-index: 3000;
             overflow-y: auto;
+        }
+
+        .admin-panel.show {
+            display: block;
         }
 
         .admin-content {
@@ -213,11 +248,11 @@
             background: #ef4444;
             border: none;
             color: white;
-            width: 30px;
-            height: 30px;
+            width: 35px;
+            height: 35px;
             border-radius: 50%;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
         }
 
         .form-group {
@@ -296,20 +331,13 @@
             margin-top: 50px;
         }
 
-        @media (max-width: 600px) {
-            .logo h1 {
-                font-size: 1.2rem;
-            }
-            .btn-admin {
-                position: static;
-                transform: none;
-                margin-top: 10px;
-                display: block;
-                width: 100%;
-            }
-            .header {
-                position: relative;
-            }
+        .secret-hint {
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+            color: #1a1a2e;
+            font-size: 0.5rem;
+            user-select: none;
         }
     </style>
 </head>
@@ -319,24 +347,29 @@
         <div class="logo">
             <h1>BS RENANZIN <span>DOWNLOAD</span></h1>
         </div>
-        <button class="btn-admin" onclick="toggleAdmin()">⚙️ Admin</button>
     </header>
-
-    <div class="search-box">
-        <input type="text" id="searchInput" placeholder="🔍 Buscar jogos..." onkeyup="searchGames()">
-    </div>
-
-    <div class="filters">
-        <button class="filter-btn active" onclick="filterGames('all')">Todos</button>
-        <button class="filter-btn" onclick="filterGames('ação')">Ação</button>
-        <button class="filter-btn" onclick="filterGames('aventura')">Aventura</button>
-        <button class="filter-btn" onclick="filterGames('estratégia')">Estratégia</button>
-        <button class="filter-btn" onclick="filterGames('rpg')">RPG</button>
-        <button class="filter-btn" onclick="filterGames('corrida')">Corrida</button>
-    </div>
 
     <div class="games-container" id="gamesContainer">
         <!-- Jogos aparecem aqui -->
+    </div>
+
+    <!-- Área secreta para ativar admin (invisível) -->
+    <div class="admin-access" onclick="showPasswordModal()"></div>
+    
+    <!-- Botão Admin (só aparece depois da senha) -->
+    <button class="btn-admin" id="adminBtn" onclick="toggleAdmin()" title="Admin">⚙️</button>
+
+    <!-- Modal de Senha -->
+    <div class="password-modal" id="passwordModal">
+        <div class="password-box">
+            <h3>🔐 Área Restrita</h3>
+            <input type="password" id="passwordInput" placeholder="Digite a senha" maxlength="20">
+            <div>
+                <button onclick="checkPassword()">Entrar</button>
+                <button class="cancel-btn" onclick="hidePasswordModal()">Cancelar</button>
+            </div>
+            <p style="margin-top: 15px; color: #666; font-size: 0.8rem;">Dica: sua senha é renan2024</p>
+        </div>
     </div>
 
     <!-- Painel Admin -->
@@ -369,7 +402,6 @@
                 <div class="form-group">
                     <label>Link da Imagem</label>
                     <input type="url" id="gameImage" required placeholder="https://...">
-                    <small style="color: #666;">Cole o link direto da imagem</small>
                 </div>
 
                 <div class="form-group">
@@ -396,18 +428,20 @@
 
             <div class="game-list" id="gameList">
                 <h3 style="margin-top: 20px;">Jogos Adicionados</h3>
-                <!-- Lista de jogos para gerenciar -->
             </div>
         </div>
     </div>
 
     <footer class="footer">
-        <p>© 2024 BS RENANZIN DOWNLOAD - Todos os direitos reservados</p>
-        <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">Site criado por você 💜</p>
+        <p>© 2026 BS RENANZIN - Todos os direitos reservados</p>
     </footer>
 
+    <div class="secret-hint">.</div>
+
     <script>
-        // Dados dos jogos (começa vazio ou com exemplos)
+        // SENHA SECRETA - MUDE AQUI SE QUISER
+        const ADMIN_PASSWORD = 'BS RENANZIN';
+        
         let games = JSON.parse(localStorage.getItem('meusJogos')) || [
             {
                 id: 1,
@@ -420,22 +454,14 @@
             }
         ];
 
-        let currentFilter = 'all';
+        let isAdmin = false;
 
         // Carregar jogos na tela
         function loadGames() {
             const container = document.getElementById('gamesContainer');
-            const search = document.getElementById('searchInput').value.toLowerCase();
-            
             container.innerHTML = '';
             
-            const filtered = games.filter(g => {
-                const matchSearch = g.name.toLowerCase().includes(search) || g.desc.toLowerCase().includes(search);
-                const matchCategory = currentFilter === 'all' || g.category === currentFilter;
-                return matchSearch && matchCategory;
-            });
-
-            filtered.forEach(game => {
+            games.forEach(game => {
                 container.innerHTML += `
                     <div class="game-card">
                         <img src="${game.image}" class="game-image" onerror="this.src='https://via.placeholder.com/300x160/1a1a2e/ffffff?text=Sem+Imagem'">
@@ -453,28 +479,36 @@
             updateGameList();
         }
 
-        // Filtrar jogos
-        function filterGames(cat) {
-            currentFilter = cat;
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if(btn.textContent.toLowerCase().includes(cat) || (cat === 'all' && btn.textContent === 'Todos')) {
-                    btn.classList.add('active');
-                }
-            });
-            loadGames();
+        // Mostrar modal de senha
+        function showPasswordModal() {
+            document.getElementById('passwordModal').classList.add('show');
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').focus();
         }
 
-        // Buscar jogos
-        function searchGames() {
-            loadGames();
+        function hidePasswordModal() {
+            document.getElementById('passwordModal').classList.remove('show');
+        }
+
+        // Verificar senha
+        function checkPassword() {
+            const input = document.getElementById('passwordInput').value;
+            if(input === ADMIN_PASSWORD) {
+                isAdmin = true;
+                hidePasswordModal();
+                document.getElementById('adminBtn').classList.add('show');
+                toggleAdmin();
+            } else {
+                alert('❌ Senha incorreta!');
+                document.getElementById('passwordInput').value = '';
+            }
         }
 
         // Toggle painel admin
         function toggleAdmin() {
             const panel = document.getElementById('adminPanel');
-            panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
-            if(panel.style.display === 'block') updateGameList();
+            panel.classList.toggle('show');
+            if(panel.classList.contains('show')) updateGameList();
         }
 
         // Adicionar jogo
@@ -494,14 +528,11 @@
             games.push(newGame);
             localStorage.setItem('meusJogos', JSON.stringify(games));
             
-            // Limpar formulário
             e.target.reset();
-            
             alert('✅ Jogo adicionado com sucesso!');
             loadGames();
         }
 
-        // Atualizar lista no admin
         function updateGameList() {
             const list = document.getElementById('gameList');
             let html = '<h3 style="margin-top: 20px;">Jogos Adicionados (' + games.length + ')</h3>';
@@ -518,7 +549,6 @@
             list.innerHTML = html;
         }
 
-        // Deletar jogo
         function deleteGame(id) {
             if(confirm('Remover este jogo?')) {
                 games = games.filter(g => g.id !== id);
@@ -527,7 +557,6 @@
             }
         }
 
-        // Exportar dados (backup)
         function exportData() {
             const data = JSON.stringify(games, null, 2);
             const blob = new Blob([data], {type: 'application/json'});
@@ -536,10 +565,9 @@
             a.href = url;
             a.download = 'meus-jogos-backup.json';
             a.click();
-            alert('💾 Backup salvo! Guarde este arquivo com segurança.');
+            alert('💾 Backup salvo!');
         }
 
-        // Importar dados
         function importData(input) {
             const file = input.files[0];
             if(!file) return;
@@ -550,7 +578,7 @@
                     games = JSON.parse(e.target.result);
                     localStorage.setItem('meusJogos', JSON.stringify(games));
                     loadGames();
-                    alert('✅ Jogos carregados com sucesso!');
+                    alert('✅ Jogos carregados!');
                 } catch(err) {
                     alert('❌ Erro ao carregar arquivo');
                 }
@@ -560,7 +588,13 @@
 
         // Iniciar
         loadGames();
+
+        // Enter na senha
+        document.getElementById('passwordInput')?.addEventListener('keypress', function(e) {
+            if(e.key === 'Enter') checkPassword();
+        });
     </script>
 
 </body>
 </html>
+
