@@ -1,13 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Criar Senha</title>
+<meta charset="UTF-8">
+<title>Gerar Senha</title>
+<style>
+body{
+  font-family: Arial;
+  text-align: center;
+  margin-top: 60px;
+}
+button{
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+#senha{
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+</style>
 </head>
 <body>
 
-<button onclick="gerarSenha()">Gerar Senha</button>
+<h2>Para continuar o download</h2>
+<p>Clique no botão <b>Gerar Senha</b> e copie a senha que aparecer.</p>
+
+<button onclick="gerarSenha()">Criar Senha</button>
+
 <p id="senha"></p>
+
+<br><br>
+
+<a href="download.html">
+  <button>Ir para página de Download</button>
+</a>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
