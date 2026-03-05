@@ -46,7 +46,20 @@ window.verificar = async function() {
   document.getElementById("status").innerText = "Download liberado!";
 
   // COLOQUE AQUI SEU LINK DO MEDIAFIRE
-  window.location.href = "LINK_DO_MEDIAFIRE_AQUI";
+  const params = new URLSearchParams(window.location.search);
+const arquivo = params.get("arquivo");
+
+if (arquivo === "freefire") {
+  window.location.href = "LINK_REAL_DO_FREEFIRE";
+}
+
+if (arquivo === "brawlstars") {
+  window.location.href = "LINK_REAL_DO_BRAWL";
+}
+
+if (arquivo === "gta") {
+  window.location.href = "LINK_REAL_DO_GTA";
+}
 }
 </script>
 
