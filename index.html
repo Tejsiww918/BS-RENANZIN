@@ -1,645 +1,112 @@
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8525583709499760"
-     crossorigin="anonymous"></script>
-
-
-
-
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BS RENANZIN DOWNLOAD</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BS RENANZIN</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0f0f1a;
-            color: white;
-            line-height: 1.6;
-        }
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b0b;
+  color: white;
+  text-align: center;
+}
 
-        .header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            padding: 20px;
-            text-align: center;
-            border-bottom: 3px solid #7c3aed;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+/* Topo estilo gamer */
+header {
+  background: linear-gradient(90deg, #ff0055, #ff7a00);
+  padding: 40px 20px;
+}
 
-        .logo h1 {
-            font-size: 1.5rem;
-            color: white;
-        }
+header h1 {
+  margin: 0;
+  font-size: 28px;
+}
 
-        .logo span {
-            color: #06b6d4;
-            text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
-        }
+header p {
+  opacity: 0.8;
+}
 
-        /* Botão Admin escondido - só aparece com senha */
-        .admin-access {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            opacity: 0;
-            z-index: 999;
-        }
+/* Caixa de downloads */
+.container {
+  padding: 30px;
+}
 
-        .btn-admin {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #7c3aed;
-            border: none;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: none;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4);
-        }
+.card {
+  background: #1a1a1a;
+  border: 1px solid #ff0055;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 15px auto;
+  max-width: 400px;
+  box-shadow: 0 0 15px #ff0055;
+}
 
-        .btn-admin.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.card h3 {
+  margin-bottom: 10px;
+}
 
-        .games-container {
-            padding: 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
+.btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background: #ff0055;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: 0.3s;
+  font-weight: bold;
+}
 
-        .game-card {
-            background: #1a1a2e;
-            border: 1px solid #2a2a3e;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: transform 0.3s;
-        }
+.btn:hover {
+  background: #ff7a00;
+  transform: scale(1.05);
+}
 
-        .game-card:hover {
-            transform: translateY(-5px);
-            border-color: #06b6d4;
-        }
-
-        .game-image {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            background: #252542;
-        }
-
-        .game-info {
-            padding: 15px;
-        }
-
-        .game-category {
-            display: inline-block;
-            background: rgba(124, 58, 237, 0.2);
-            color: #06b6d4;
-            padding: 4px 10px;
-            border-radius: 10px;
-            font-size: 0.75rem;
-            margin-bottom: 8px;
-        }
-
-        .game-title {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            color: white;
-        }
-
-        .game-desc {
-            color: #a0a0b0;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-
-        .game-size {
-            color: #7c3aed;
-            font-size: 0.85rem;
-            margin-bottom: 12px;
-        }
-
-        .download-btn {
-            display: block;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            text-align: center;
-            padding: 12px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.2s;
-        }
-
-        .download-btn:hover {
-            transform: scale(1.02);
-        }
-
-        /* Modal de Senha */
-        .password-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.9);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .password-modal.show {
-            display: flex;
-        }
-
-        .password-box {
-            background: #1a1a2e;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            max-width: 300px;
-            width: 90%;
-            border: 2px solid #7c3aed;
-        }
-
-        .password-box h3 {
-            margin-bottom: 20px;
-            color: #06b6d4;
-        }
-
-        .password-box input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #2a2a3e;
-            border-radius: 8px;
-            background: #0f0f1a;
-            color: white;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-
-        .password-box button {
-            background: #7c3aed;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            margin: 5px;
-        }
-
-        .password-box .cancel-btn {
-            background: #ef4444;
-        }
-
-        /* Painel Admin */
-        .admin-panel {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.95);
-            z-index: 3000;
-            overflow-y: auto;
-        }
-
-        .admin-panel.show {
-            display: block;
-        }
-
-        .admin-content {
-            background: #1a1a2e;
-            max-width: 500px;
-            margin: 20px auto;
-            border-radius: 15px;
-            padding: 20px;
-        }
-
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #7c3aed;
-        }
-
-        .close-btn {
-            background: #ef4444;
-            border: none;
-            color: white;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.3rem;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #06b6d4;
-            font-weight: bold;
-        }
-
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #2a2a3e;
-            border-radius: 8px;
-            background: #0f0f1a;
-            color: white;
-            font-size: 1rem;
-        }
-
-        .btn-primary {
-            background: #7c3aed;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1rem;
-            font-weight: bold;
-            margin-top: 10px;
-        }
-
-        .btn-secondary {
-            background: #252542;
-            color: white;
-            border: 1px solid #2a2a3e;
-            padding: 10px 15px;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 10px;
-            width: 100%;
-        }
-
-        .game-list {
-            margin-top: 20px;
-        }
-
-        .game-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #252542;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 8px;
-        }
-
-        .delete-btn {
-            background: #ef4444;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 30px;
-            background: #1a1a2e;
-            border-top: 1px solid #2a2a3e;
-            margin-top: 50px;
-        }
-
-        .secret-hint {
-            position: fixed;
-            bottom: 5px;
-            right: 5px;
-            color: #1a1a2e;
-            font-size: 0.5rem;
-            user-select: none;
-        }
-    </style>
+/* Rodapé */
+footer {
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 12px;
+  opacity: 0.5;
+}
+</style>
 </head>
+
 <body>
 
-    <header class="header">
-        <div class="logo">
-            <h1>BS RENANZIN <span>DOWNLOAD</span></h1>
-        </div>
-    </header>
+<header>
+  <h1>🔥 BS DOWNLOAD HUB</h1>
+  <p>MELHORES MODS AQUI ⚡</p>
+</header>
 
-    <div class="games-container" id="gamesContainer">
-        <!-- Jogos aparecem aqui -->
-    </div>
+<div class="container">
 
-    <!-- Área secreta para ativar admin (invisível) -->
-    <div class="admin-access" onclick="showPasswordModal()"></div>
-    
-    <!-- Botão Admin (só aparece depois da senha) -->
-    <button class="btn-admin" id="adminBtn" onclick="toggleAdmin()" title="Admin">⚙️</button>
+  <div class="card">
+    <h3>📁 Arquivo 1</h3>
+    <p>Descrição do arquivo aqui</p>
+    <a class="btn" href="LINK_DO_DOWNLOAD_AQUI" target="_blank">Baixar</a>
+  </div>
 
-    <!-- Modal de Senha -->
-    <div class="password-modal" id="passwordModal">
-        <div class="password-box">
-            <h3>🔐 Área Restrita</h3>
-            <input type="password" id="passwordInput" placeholder="Digite a senha" maxlength="20">
-            <div>
-                <button onclick="checkPassword()">Entrar</button>
-                <button class="cancel-btn" onclick="hidePasswordModal()">Cancelar</button>
-            </div>
-            <p style="margin-top: 15px; color: #666; font-size: 0.8rem;">Dica: sua senha é renan2024</p>
-        </div>
-    </div>
+  <div class="card">
+    <h3>📁 Arquivo 2</h3>
+    <p>Descrição do arquivo aqui</p>
+    <a class="btn" href="LINK_DO_DOWNLOAD_AQUI" target="_blank">Baixar</a>
+  </div>
 
-    <!-- Painel Admin -->
-    <div class="admin-panel" id="adminPanel">
-        <div class="admin-content">
-            <div class="admin-header">
-                <h2>⚙️ Painel Admin</h2>
-                <button class="close-btn" onclick="toggleAdmin()">×</button>
-            </div>
+  <div class="card">
+    <h3>📁 Arquivo 3</h3>
+    <p>Descrição do arquivo aqui</p>
+    <a class="btn" href="LINK_DO_DOWNLOAD_AQUI" target="_blank">Baixar</a>
+  </div>
 
-            <h3>Adicionar Novo Jogo</h3>
-            <form onsubmit="addGame(event)">
-                <div class="form-group">
-                    <label>Nome do Jogo</label>
-                    <input type="text" id="gameName" required placeholder="Ex: Free Fire">
-                </div>
-                
-                <div class="form-group">
-                    <label>Categoria</label>
-                    <select id="gameCategory" required>
-                        <option value="ação">Ação</option>
-                        <option value="aventura">Aventura</option>
-                        <option value="estratégia">Estratégia</option>
-                        <option value="rpg">RPG</option>
-                        <option value="corrida">Corrida</option>
-                        <option value="esporte">Esporte</option>
-                    </select>
-                </div>
+</div>
 
-                <div class="form-group">
-                    <label>Link da Imagem</label>
-                    <input type="url" id="gameImage" required placeholder="https://...">
-                </div>
-
-                <div class="form-group">
-                    <label>Link da Play Store</label>
-                    <input type="url" id="gameLink" required placeholder="https://play.google.com/...">
-                </div>
-
-                <div class="form-group">
-                    <label>Descrição</label>
-                    <textarea id="gameDesc" rows="2" placeholder="Descreva o jogo..."></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label>Tamanho (opcional)</label>
-                    <input type="text" id="gameSize" placeholder="Ex: 500MB">
-                </div>
-
-                <button type="submit" class="btn-primary">➕ Adicionar Jogo</button>
-            </form>
-
-            <button class="btn-secondary" onclick="exportData()">💾 Salvar Backup</button>
-            <input type="file" id="importFile" style="display: none;" onchange="importData(this)">
-            <button class="btn-secondary" onclick="document.getElementById('importFile').click()">📂 Carregar Backup</button>
-
-            <div class="game-list" id="gameList">
-                <h3 style="margin-top: 20px;">Jogos Adicionados</h3>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <p>© 2026 BS RENANZIN DOWNLOAD - Todos os direitos reservados</p>
-    </footer>
-
-    <div class="secret-hint">.</div>
-
-    <script>
-        // SENHA SECRETA - MUDE AQUI SE QUISER
-        const ADMIN_PASSWORD = 'BS RENANZIN';
-        
-        let games = JSON.parse(localStorage.getItem('meusJogos')) || [
-            {
-                id: 1770961952500,
-    name: "FREE FIRE OBRIGATÓRIO",
-    category: "ação",
-    image: "https://imgur.com/a/L9gnT2h",
-    link: "https://tejsiww918.github.io/BS-RENANZIN/senha.html?arquivo=free",
-    desc: "OS MOD SÓ FUNCIONA NESSE FREE FIRE",
-    size: "368 MB"
-            },
-
-        
-  
-
-            {
-    id: 1770963828870,
-    name: "BR MODS",
-    category: "ação",
-    image: "https://files.catbox.moe/8bq2yq.png",
-    link: "https://mineurl.com/bsmods",
-    desc: "DESATUALIZADO NÃO BAIXE",
-    size: "1.4 MB"
-            },
-
-            
-  {
-    id: 177096195500,
-    name: "AINCRAD 3.2",
-    category: "ação",
-    image: "https://mineurl.com/a24b5e",
-    link: "https://mineurl.com/a24b5e",
-    desc: "PEGUE A KEY NO LINK DA DESCRIÇÃO",
-    size: "1 MB"
-  },
-
-            {
-    id: 177096195500,
-    name: "STRICKS BR",
-    category: "ação",
-    image: "https://tejsiww918.github.io/BS-RENANZIN/senha.html?arquivo=stricks",
-    link: "https://mineurl.com/stricksbbr",
-    desc: "DESATUALIZADO NÃO BAIXE",
-    size: "1 MB"
-  },
-        
-  
-  
-        ];
-
-        let isAdmin = false;
-
-        // Carregar jogos na tela
-        function loadGames() {
-            const container = document.getElementById('gamesContainer');
-            container.innerHTML = '';
-            
-            games.forEach(game => {
-                container.innerHTML += `
-                    <div class="game-card">
-                        <img src="${game.image}" class="game-image" onerror="this.src='https://via.placeholder.com/300x160/1a1a2e/ffffff?text=Sem+Imagem'">
-                        <div class="game-info">
-                            <span class="game-category">${game.category}</span>
-                            <h3 class="game-title">${game.name}</h3>
-                            <p class="game-desc">${game.desc}</p>
-                            <p class="game-size">📦 ${game.size || 'Tamanho variável'}</p>
-                            <a href="${game.link}" target="_blank" class="download-btn">📥 BAIXAR</a>
-                        </div>
-                    </div>
-                `;
-            });
-
-            updateGameList();
-        }
-
-        // Mostrar modal de senha
-        function showPasswordModal() {
-            document.getElementById('passwordModal').classList.add('show');
-            document.getElementById('passwordInput').value = '';
-            document.getElementById('passwordInput').focus();
-        }
-
-        function hidePasswordModal() {
-            document.getElementById('passwordModal').classList.remove('show');
-        }
-
-        // Verificar senha
-        function checkPassword() {
-            const input = document.getElementById('passwordInput').value;
-            if(input === ADMIN_PASSWORD) {
-                isAdmin = true;
-                hidePasswordModal();
-                document.getElementById('adminBtn').classList.add('show');
-                toggleAdmin();
-            } else {
-                alert('❌ Senha incorreta!');
-                document.getElementById('passwordInput').value = '';
-            }
-        }
-
-        // Toggle painel admin
-        function toggleAdmin() {
-            const panel = document.getElementById('adminPanel');
-            panel.classList.toggle('show');
-            if(panel.classList.contains('show')) updateGameList();
-        }
-
-        // Adicionar jogo
-        function addGame(e) {
-            e.preventDefault();
-            
-            const newGame = {
-                id: Date.now(),
-                name: document.getElementById('gameName').value,
-                category: document.getElementById('gameCategory').value,
-                image: document.getElementById('gameImage').value,
-                link: document.getElementById('gameLink').value,
-                desc: document.getElementById('gameDesc').value,
-                size: document.getElementById('gameSize').value
-            };
-
-            games.push(newGame);
-            localStorage.setItem('meusJogos', JSON.stringify(games));
-            
-            e.target.reset();
-            alert('✅ Jogo adicionado com sucesso!');
-            loadGames();
-        }
-
-        function updateGameList() {
-            const list = document.getElementById('gameList');
-            let html = '<h3 style="margin-top: 20px;">Jogos Adicionados (' + games.length + ')</h3>';
-            
-            games.forEach(game => {
-                html += `
-                    <div class="game-item">
-                        <span>${game.name}</span>
-                        <button class="delete-btn" onclick="deleteGame(${game.id})">🗑️</button>
-                    </div>
-                `;
-            });
-            
-            list.innerHTML = html;
-        }
-
-        function deleteGame(id) {
-            if(confirm('Remover este jogo?')) {
-                games = games.filter(g => g.id !== id);
-                localStorage.setItem('meusJogos', JSON.stringify(games));
-                loadGames();
-            }
-        }
-
-        function exportData() {
-            const data = JSON.stringify(games, null, 2);
-            const blob = new Blob([data], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'meus-jogos-backup.json';
-            a.click();
-            alert('💾 Backup salvo!');
-        }
-
-        function importData(input) {
-            const file = input.files[0];
-            if(!file) return;
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    games = JSON.parse(e.target.result);
-                    localStorage.setItem('meusJogos', JSON.stringify(games));
-                    loadGames();
-                    alert('✅ Jogos carregados!');
-                } catch(err) {
-                    alert('❌ Erro ao carregar arquivo');
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        // Iniciar
-        loadGames();
-
-        // Enter na senha
-        document.getElementById('passwordInput')?.addEventListener('keypress', function(e) {
-            if(e.key === 'Enter') checkPassword();
-        });
-    </script>
+<footer>
+  © 2026 BS RENANZIN - Criado por você
+</footer>
 
 </body>
-    </html>
-                
+</html>
