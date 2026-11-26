@@ -1,311 +1,682 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BS DOWNLOAD HUB</title>
+<meta name="theme-color" content="#070b18">
+
+<title>BS DOWNLOAD HUB | Downloads</title>
+
+<meta name="description" content="BS DOWNLOAD HUB - Seu universo de downloads, aplicativos e ferramentas.">
 
 <style>
+:root {
+  --bg: #070b18;
+  --card: #101a2d;
+  --card2: #0c1425;
+  --cyan: #00eaff;
+  --blue: #087cff;
+  --green: #00ffb3;
+  --text: #ffffff;
+  --muted: #9aabc5;
+  --border: rgba(0,234,255,.17);
+}
+
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #070914;
-  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
 }
 
+/* FUNDO */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 10%, #063d6730, transparent 35%),
+    radial-gradient(circle at 85% 45%, #073e7230, transparent 35%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* CABEÇALHO */
+
 header {
-  padding: 55px 20px 40px;
+  position: relative;
   text-align: center;
-  background: radial-gradient(circle at top, #153c65, #101126 65%, #070914);
-  border-bottom: 1px solid #174d70;
+  padding: 65px 20px 55px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, #10294b, #0b1226 55%, #070b18);
+  border-bottom: 1px solid var(--border);
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: #00c8ff15;
+  filter: blur(75px);
+  border-radius: 50%;
+  top: -150px;
+  left: calc(50% - 150px);
+}
+
+.header-content {
+  position: relative;
+  z-index: 1;
 }
 
 .logo {
-  font-size: 34px;
+  font-size: clamp(27px, 6vw, 43px);
   font-weight: 900;
-  color: #00eaff;
-  text-shadow: 0 0 18px #00c8ff;
+  letter-spacing: 1px;
+  color: var(--cyan);
+  text-shadow: 0 0 25px #00c8ff75;
 }
 
-header p {
-  color: #aab9d1;
+.subtitle {
+  margin-top: 13px;
+  color: #b5c6df;
   font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 7px 15px;
+  border: 1px solid #00ffb340;
+  border-radius: 30px;
+  background: #00ffb310;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .insta {
-  display: inline-block;
-  margin-top: 15px;
-  padding: 12px 22px;
-  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 23px;
+  padding: 13px 23px;
+  border-radius: 12px;
   color: white;
   text-decoration: none;
+  font-size: 13px;
   font-weight: bold;
-  background: linear-gradient(90deg,#753bff,#00bfff);
-  box-shadow: 0 0 15px #246bff55;
+  background: linear-gradient(100deg, #743bff, #008cff);
+  box-shadow: 0 5px 25px #246bff40;
+  transition: .25s;
 }
 
+.insta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px #246bff70;
+}
+
+/* CONTEÚDO */
+
 .container {
-  max-width: 950px;
+  width: 100%;
+  max-width: 1100px;
   margin: auto;
-  padding: 30px 18px;
+  padding: 42px 20px 60px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 22px;
 }
 
 .section-title {
-  color: #00eaff;
-  font-size: 21px;
-  margin-bottom: 20px;
+  color: var(--cyan);
+  font-size: 23px;
+  font-weight: 800;
+}
+
+.total {
+  color: var(--muted);
+  font-size: 12px;
+  padding: 8px 12px;
+  background: #111d32;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+/* PESQUISA */
+
+.search-area {
+  position: relative;
+  margin-bottom: 30px;
 }
 
 .search {
   width: 100%;
-  padding: 15px;
+  padding: 17px 18px 17px 48px;
   border: 1px solid #263b5d;
-  background: #11182a;
+  background: #101a2d;
   color: white;
-  border-radius: 12px;
+  border-radius: 13px;
   outline: none;
-  margin-bottom: 25px;
-  font-size: 15px;
+  font-size: 14px;
+  transition: .25s;
 }
 
 .search:focus {
-  border-color: #00eaff;
-  box-shadow: 0 0 12px #00eaff44;
+  border-color: var(--cyan);
+  box-shadow: 0 0 18px #00eaff25;
 }
+
+.search::placeholder {
+  color: #71839e;
+}
+
+.search-icon {
+  position: absolute;
+  left: 17px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 17px;
+  pointer-events: none;
+}
+
+/* CARDS */
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+  gap: 22px;
 }
 
 .card {
-  background: linear-gradient(145deg,#131c30,#0b1020);
-  border: 1px solid #263e62;
-  border-radius: 16px;
-  padding: 23px;
-  transition: .3s;
-  box-shadow: 0 5px 20px #0005;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  min-width: 0;
+  background: linear-gradient(145deg, #14213a, #0b1222);
+  border: 1px solid #263d60;
+  border-radius: 17px;
+  overflow: hidden;
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+  box-shadow: 0 8px 25px #0003;
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  border-color: #00eaff;
-  box-shadow: 0 0 20px #00c8ff30;
+  transform: translateY(-5px);
+  border-color: var(--cyan);
+  box-shadow: 0 10px 30px #00bfff18;
 }
 
-.icon {
-  font-size: 35px;
-  margin-bottom: 12px;
+/* IMAGENS */
+
+.image-area {
+  width: 100%;
+  height: 155px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #101f38, #0a1222);
+  border: 1px solid #263b5d;
+  border-radius: 12px;
+  margin-bottom: 18px;
+  overflow: hidden;
 }
+
+.image-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
+  transition: transform .3s;
+}
+
+.card:hover .image-area img {
+  transform: scale(1.06);
+}
+
+/* INFORMAÇÕES */
 
 .card h3 {
-  color: #fff;
-  margin: 5px 0 10px;
+  color: white;
+  font-size: 17px;
+  font-weight: 800;
+  margin-bottom: 10px;
+  letter-spacing: .3px;
 }
 
 .card p {
-  color: #9baac4;
-  font-size: 13px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  min-height: 38px;
+  overflow-wrap: anywhere;
 }
 
 .tag {
   display: inline-block;
-  padding: 5px 10px;
-  background: #102b42;
-  color: #00eaff;
-  border-radius: 6px;
-  font-size: 11px;
-  margin-top: 5px;
+  align-self: flex-start;
+  margin-top: 13px;
+  padding: 7px 10px;
+  background: #00c8ff12;
+  border: 1px solid #00c8ff30;
+  color: var(--cyan);
+  border-radius: 7px;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: .4px;
 }
+
+/* BOTÃO DOWNLOAD */
 
 .btn {
   display: block;
+  width: 100%;
+  margin-top: auto;
+  padding: 14px 10px;
   margin-top: 20px;
-  padding: 13px;
-  border-radius: 9px;
+  border-radius: 10px;
   text-align: center;
   text-decoration: none;
   color: #06101a;
-  font-weight: bold;
-  background: linear-gradient(90deg,#00eaff,#00ffae);
-  transition: .3s;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: .5px;
+  background: linear-gradient(100deg, var(--cyan), var(--green));
+  box-shadow: 0 5px 18px #00eaff20;
+  transition: .25s;
 }
 
 .btn:hover {
-  box-shadow: 0 0 18px #00eaff88;
-  transform: scale(1.03);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 25px #00eaff50;
 }
 
-footer {
-  margin-top: 40px;
-  padding: 25px;
+/* SEM RESULTADOS */
+
+.empty {
+  display: none;
   text-align: center;
-  color: #66758e;
-  font-size: 12px;
-  border-top: 1px solid #19253b;
+  padding: 45px 15px;
+  margin-top: 20px;
+  color: var(--muted);
+  background: #101a2d;
+  border: 1px solid var(--border);
+  border-radius: 14px;
 }
 
-footer strong {
-  color: #00eaff;
+.empty.show {
+  display: block;
 }
 
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+/* RODAPÉ */
+
+footer {
+  margin-top: 20px;
+  padding: 35px 20px;
+  text-align: center;
+  background: #090e1c;
+  border-top: 1px solid var(--border);
+  color: #72829b;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+footer strong {
+  color: var(--cyan);
+  letter-spacing: 1px;
+}
+
+.footer-subtitle {
+  margin-top: 8px;
+  color: #4d607c;
+  font-size: 10px;
+}
+
+/* CELULARES */
+
+@media (max-width: 550px) {
+  header {
+    padding: 52px 15px 43px;
+  }
+
+  .container {
+    padding: 30px 14px 45px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    padding: 11px;
+    border-radius: 13px;
+  }
+
+  .image-area {
+    height: 115px;
+    margin-bottom: 13px;
+  }
+
+  .card h3 {
+    font-size: 13px;
+  }
+
+  .card p {
+    font-size: 11px;
+  }
+
+  .tag {
+    font-size: 9px;
+    padding: 6px 7px;
+  }
+
+  .btn {
+    font-size: 10px;
+    padding: 12px 5px;
+  }
+
+  .section-title {
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 340px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">🔥 BS DOWNLOAD HUB</div>
-  <p>SEU UNIVERSO DE DOWNLOADS ⚡</p>
+<!-- CABEÇALHO -->
 
-  <a class="insta"
-     href="https://www.instagram.com/renanzinmw/"
-     target="_blank">
-     📷 MEU INSTAGRAM
-  </a>
+<header>
+  <div class="header-content">
+
+    <div class="logo">🔥 BS DOWNLOAD HUB</div>
+
+    <p class="subtitle">SEU UNIVERSO DE DOWNLOADS ⚡</p>
+
+    <div class="status">● CENTRAL DE DOWNLOADS</div>
+
+    <br>
+
+    <a class="insta"
+       href="https://www.instagram.com/renanzinmw/"
+       target="_blank"
+       rel="noopener noreferrer">
+       📷 MEU INSTAGRAM
+    </a>
+
+  </div>
 </header>
 
-<div class="container">
+<!-- CONTEÚDO -->
 
-  <h2 class="section-title">📁 DOWNLOADS</h2>
+<main class="container">
 
-  <input
-    class="search"
-    type="text"
-    id="search"
-    placeholder="🔎 Pesquisar aplicativo..."
-    oninput="searchApps()"
-  >
+  <div class="section-header">
+    <h2 class="section-title">📁 DOWNLOADS</h2>
+    <span class="total">07 ARQUIVOS</span>
+  </div>
+
+  <!-- PESQUISA -->
+
+  <div class="search-area">
+    <span class="search-icon">🔎</span>
+
+    <input
+      class="search"
+      type="search"
+      id="search"
+      placeholder="Pesquisar aplicativo..."
+      aria-label="Pesquisar aplicativos"
+      oninput="searchApps()"
+    >
+  </div>
+
+  <!-- LISTA DE DOWNLOADS -->
 
   <div class="cards" id="cards">
 
-     <div class="card">
-    <img src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&" width="50">
-  <h3>FREE FIRE 32 BIT</h3>
-  <p>USE NO NATAN MODZ</p>
-  <span class="tag">FREE FIRE 32 BIT</span>
+    <!-- FREE FIRE 32 BIT -->
 
-  <a class="btn"
-     href="https://www.mediafire.com/file/9mh50821wt71cdq/Free+Fire_+Storm+Arena_1.132.1_APKPure.xapk/file"
-     target="_blank">
-     ⬇ BAIXAR AGORA
-  </a>
-</div>
+    <article class="card">
+      <div class="image-area">
+        <img
+          src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&"
+          alt="FREE FIRE 32 BIT"
+          loading="lazy"
+        >
+      </div>
 
-     <div class="card">
-   <img src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&" width="50">
-  <h3>FREE FIRE MAX</h3>
-  <p>ALGUNS MOD SÓ FUNCIONA NESSE FREE FIRE</p>
-  <span class="tag">FREE FIRE MAX</span>
+      <h3>FREE FIRE 32 BIT</h3>
+      <p>USE NO NATAN MODZ</p>
+      <span class="tag">FREE FIRE 32 BIT</span>
 
-  <a class="btn"
-     href="https://www.mediafire.com/file/4l6bdct3westmkn/ZYTRON_PRO_Free_Fire_MAX.apks/file"
-     target="_blank">
-     ⬇ BAIXAR AGORA
-  </a>
-</div>
+      <a class="btn"
+         href="https://www.mediafire.com/file/9mh50821wt71cdq/Free+Fire_+Storm+Arena_1.132.1_APKPure.xapk/file"
+         target="_blank"
+         rel="noopener noreferrer">
+         ⬇ BAIXAR AGORA
+      </a>
+    </article>
 
+    <!-- FREE FIRE MAX -->
 
-    <div class="card">
-        <img src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&" width="50">
+    <article class="card">
+      <div class="image-area">
+        <img
+          src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&"
+          alt="FREE FIRE MAX"
+          loading="lazy"
+        >
+      </div>
+
+      <h3>FREE FIRE MAX</h3>
+      <p>ALGUNS MOD SÓ FUNCIONA NESSE FREE FIRE</p>
+      <span class="tag">FREE FIRE MAX</span>
+
+      <a class="btn"
+         href="https://www.mediafire.com/file/4l6bdct3westmkn/ZYTRON_PRO_Free_Fire_MAX.apks/file"
+         target="_blank"
+         rel="noopener noreferrer">
+         ⬇ BAIXAR AGORA
+      </a>
+    </article>
+
+    <!-- RISHABH WIRE -->
+
+    <article class="card">
+      <div class="image-area">
+        <img
+          src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&"
+          alt="RISHABH WIRE"
+          loading="lazy"
+        >
+      </div>
+
       <h3>RISHABH WIRE</h3>
       <p>SEM KEY</p>
       <span class="tag">FREE FIRE E FREE FIRE MAX</span>
 
       <a class="btn"
          href="https://www.mediafire.com/file/a8tllnv892ixivn/RISHABH+WIRE+V22.apk/file"
-         target="_blank">
+         target="_blank"
+         rel="noopener noreferrer">
          ⬇ BAIXAR AGORA
       </a>
-    </div>
+    </article>
 
-    <div class="card">
-     <img src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&" width="50">
-  <h3>NATAN MODZ</h3>
-  <p>SEM KEY</p>
-  <span class="tag">FREE FIRE 32 BIT</span>
+    <!-- NATAN MODZ -->
 
-  <a class="btn"
-     href="https://www.mediafire.com/file/2b8ohedgpsabzez/natanmodz.apk/file"
-     target="_blank">
-     ⬇ BAIXAR AGORA
-  </a>
-</div>
+    <article class="card">
+      <div class="image-area">
+        <img
+          src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&"
+          alt="NATAN MODZ"
+          loading="lazy"
+        >
+      </div>
 
-    
-<div class="card">
-  <img src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&" width="50">
-  <h3>CRX WIRE</h3>
-  <p>SEM KEY</p>
-  <span class="tag">FREE FIRE</span>
+      <h3>NATAN MODZ</h3>
+      <p>SEM KEY</p>
+      <span class="tag">FREE FIRE 32 BIT</span>
 
-  <a class="btn"
-     href="https://www.mediafire.com/file/8q1dz8ahtnfvbib/CRX_WIRE_2.0.apk/file"
-     target="_blank">
-     ⬇ BAIXAR AGORA
-  </a>
-</div>
+      <a class="btn"
+         href="https://www.mediafire.com/file/2b8ohedgpsabzez/natanmodz.apk/file"
+         target="_blank"
+         rel="noopener noreferrer">
+         ⬇ BAIXAR AGORA
+      </a>
+    </article>
 
-    <div class="card">
-  <img src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&" width="50">
-  <h3>ZYTRON </h3>
-  <p>KEY:HANZXYTER-TESTZYTRON</p>
-  <span class="tag">FREE FIRE MAX DO SITE</span>
+    <!-- CRX WIRE -->
 
-  <a class="btn"
-     href="https://www.mediafire.com/file/dzpjtbilgeie9du/Zytron-1.3_Fix.apk/file"
-     target="_blank">
-     ⬇ BAIXAR AGORA
-  </a>
-    </div>
+    <article class="card">
+      <div class="image-area">
+        <img
+          src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&"
+          alt="CRX WIRE"
+          loading="lazy"
+        >
+      </div>
 
-    <div class="card">
-  <img src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&" width="50">
-  <h3>DARX MODS</h3>
-  <p>SEM KEY</p>
-  <span class="tag">FREE FIRE</span>
+      <h3>CRX WIRE</h3>
+      <p>SEM KEY</p>
+      <span class="tag">FREE FIRE</span>
 
-  <a class="btn"
-     href="https://www.mediafire.com/file/g76b8zfbi27ita0/DRIP+CLIENT+FREE+FIRE+MOD+V1.apk/file"
-     target="_blank">
-     ⬇ BAIXAR AGORA
-  </a>
-    </div>
-   
+      <a class="btn"
+         href="https://www.mediafire.com/file/8q1dz8ahtnfvbib/CRX_WIRE_2.0.apk/file"
+         target="_blank"
+         rel="noopener noreferrer">
+         ⬇ BAIXAR AGORA
+      </a>
+    </article>
+
+    <!-- ZYTRON -->
+
+    <article class="card">
+      <div class="image-area">
+        <img
+          src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&"
+          alt="ZYTRON"
+          loading="lazy"
+        >
+      </div>
+
+      <h3>ZYTRON</h3>
+      <p>KEY:HANZXYTER-TESTZYTRON</p>
+      <span class="tag">FREE FIRE MAX DO SITE</span>
+
+      <a class="btn"
+         href="https://www.mediafire.com/file/dzpjtbilgeie9du/Zytron-1.3_Fix.apk/file"
+         target="_blank"
+         rel="noopener noreferrer">
+         ⬇ BAIXAR AGORA
+      </a>
+    </article>
+
+    <!-- DARX MODS -->
+
+    <article class="card">
+      <div class="image-area">
+        <img
+          src="https://cdn.discordapp.com/attachments/1403883798940090458/1575317305632751697/file_000000008278820e88564718a6a2a038.png?ex=6b08d811&is=6b078691&hm=66173ce83e2ffcae963e0742145b88fa327fcc6d295c83a4a0ad739d48a78f64&"
+          alt="DARX MODS"
+          loading="lazy"
+        >
+      </div>
+
+      <h3>DARX MODS</h3>
+      <p>SEM KEY</p>
+      <span class="tag">FREE FIRE</span>
+
+      <a class="btn"
+         href="https://www.mediafire.com/file/g76b8zfbi27ita0/DRIP+CLIENT+FREE+FIRE+MOD+V1.apk/file"
+         target="_blank"
+         rel="noopener noreferrer">
+         ⬇ BAIXAR AGORA
+      </a>
+    </article>
 
   </div>
 
-  <p id="empty" class="hidden">
-    Nenhum aplicativo encontrado.
-  </p>
+  <!-- NENHUM RESULTADO -->
 
-</div>
+  <div id="empty" class="empty">
+    <h3>🔎 NENHUM APLICATIVO ENCONTRADO</h3>
+    <p style="margin-top:10px;font-size:13px;">
+      Tente pesquisar com outro nome.
+    </p>
+  </div>
+
+</main>
+
+<!-- RODAPÉ -->
 
 <footer>
-  © 2026 <strong>BS RENANZIN</strong><br><br>
+  © 2026 <strong>BS RENANZIN</strong>
+  <br>
   TODOS OS DIREITOS RESERVADOS ⚡
+
+  <div class="footer-subtitle">
+    BS DOWNLOAD HUB • SUA CENTRAL DE DOWNLOADS
+  </div>
 </footer>
+
+<!-- PESQUISA -->
 
 <script>
 function searchApps() {
   const search = document
     .getElementById("search")
-    .value.toLowerCase();
+    .value.toLowerCase()
+    .trim();
 
   const cards = document.querySelectorAll(".card");
   let found = 0;
 
   cards.forEach(card => {
-    const match = card.innerText.toLowerCase().includes(search);
+    const match = card.innerText
+      .toLowerCase()
+      .includes(search);
 
     card.classList.toggle("hidden", !match);
 
@@ -313,11 +684,17 @@ function searchApps() {
   });
 
   document.getElementById("empty")
-    .classList.toggle("hidden", found > 0);
+    .classList.toggle("show", found === 0);
 }
 </script>
 
-  <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "186075f4c48b41d692726c299a08ee45"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- CLOUDFLARE WEB ANALYTICS -->
+
+<script
+  defer
+  src="https://static.cloudflareinsights.com/beacon.min.js"
+  data-cf-beacon='{"token": "186075f4c48b41d692726c299a08ee45"}'>
+</script>
 
 </body>
 </html>
